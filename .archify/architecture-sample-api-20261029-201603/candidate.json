@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Sample API (openapi.yaml)",
+    "output": ".archify/architecture-sample-api-20261029-201603/sample-api.html",
+    "quality_profile": "showcase",
+    "locale": "en",
+    "repository": {
+      "url": "https://github.com/abdullahshboull-ai/documentationai-Docs",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "91d6c80699a2737185792800ed0b3c380ab3b26f"
+    },
+    "legend": {
+      "entries": {
+        "backend": {
+          "label": "API server / operation"
+        },
+        "database": {
+          "label": "Response schema"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "client",
+      "type": "external",
+      "label": "API client",
+      "sublabel": "any HTTP caller",
+      "pos": [
+        40,
+        264
+      ],
+      "size": [
+        120,
+        60
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "Sample API",
+      "sublabel": "api.example.com/v1",
+      "tag": "OpenAPI 3.0 · v1.0.0",
+      "pos": [
+        230,
+        40
+      ],
+      "size": [
+        160,
+        508
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 1,
+          "end_line": 15
+        }
+      ]
+    },
+    {
+      "id": "list-projects",
+      "type": "backend",
+      "label": "GET /projects",
+      "sublabel": "listProjects · ?limit ≤100",
+      "tag": "x-next paging",
+      "pos": [
+        470,
+        40
+      ],
+      "size": [
+        220,
+        60
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 17,
+          "end_line": 46
+        }
+      ]
+    },
+    {
+      "id": "create-project",
+      "type": "backend",
+      "label": "POST /projects",
+      "sublabel": "createProjects → 201",
+      "pos": [
+        470,
+        120
+      ],
+      "size": [
+        220,
+        56
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 47,
+          "end_line": 58
+        }
+      ]
+    },
+    {
+      "id": "get-project",
+      "type": "backend",
+      "label": "GET /projects/{projectId}",
+      "sublabel": "showProjectById",
+      "pos": [
+        470,
+        196
+      ],
+      "size": [
+        220,
+        56
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 59,
+          "end_line": 82
+        }
+      ]
+    },
+    {
+      "id": "list-documents",
+      "type": "backend",
+      "label": "GET /documents",
+      "sublabel": "listDocuments · ?limit ≤100",
+      "tag": "x-next paging",
+      "pos": [
+        470,
+        336
+      ],
+      "size": [
+        220,
+        60
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 83,
+          "end_line": 112
+        }
+      ]
+    },
+    {
+      "id": "create-document",
+      "type": "backend",
+      "label": "POST /documents",
+      "sublabel": "createDocuments → 201",
+      "pos": [
+        470,
+        416
+      ],
+      "size": [
+        220,
+        56
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 113,
+          "end_line": 124
+        }
+      ]
+    },
+    {
+      "id": "get-document",
+      "type": "backend",
+      "label": "GET /documents/{docId}",
+      "sublabel": "showDocumentById",
+      "pos": [
+        470,
+        492
+      ],
+      "size": [
+        220,
+        56
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 125,
+          "end_line": 148
+        }
+      ]
+    },
+    {
+      "id": "projects-schema",
+      "type": "database",
+      "icon": "none",
+      "label": "Projects",
+      "sublabel": "Project[]: id, name, description",
+      "pos": [
+        830,
+        116
+      ],
+      "size": [
+        190,
+        60
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 151,
+          "end_line": 166
+        }
+      ]
+    },
+    {
+      "id": "documents-schema",
+      "type": "database",
+      "icon": "none",
+      "label": "Documents",
+      "sublabel": "Document[]: id, title, content",
+      "pos": [
+        830,
+        412
+      ],
+      "size": [
+        190,
+        60
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 167,
+          "end_line": 182
+        }
+      ]
+    },
+    {
+      "id": "error-schema",
+      "type": "database",
+      "icon": "none",
+      "label": "Error",
+      "sublabel": "code, message",
+      "pos": [
+        240,
+        590
+      ],
+      "size": [
+        140,
+        60
+      ],
+      "sources": [
+        {
+          "path": "openapi.yaml",
+          "line": 183,
+          "end_line": 191
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "/projects",
+      "wraps": [
+        "list-projects",
+        "create-project",
+        "get-project"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "/documents",
+      "wraps": [
+        "list-documents",
+        "create-document",
+        "get-document"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "client-api",
+      "from": "client",
+      "to": "api",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "api-list-projects",
+      "from": "api",
+      "to": "list-projects",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-create-project",
+      "from": "api",
+      "to": "create-project",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-get-project",
+      "from": "api",
+      "to": "get-project",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-list-documents",
+      "from": "api",
+      "to": "list-documents",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-create-document",
+      "from": "api",
+      "to": "create-document",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "api-get-document",
+      "from": "api",
+      "to": "get-document",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "list-projects-200",
+      "from": "list-projects",
+      "to": "projects-schema",
+      "label": "200"
+    },
+    {
+      "id": "get-project-200",
+      "from": "get-project",
+      "to": "projects-schema",
+      "label": "200"
+    },
+    {
+      "id": "list-documents-200",
+      "from": "list-documents",
+      "to": "documents-schema",
+      "label": "200"
+    },
+    {
+      "id": "get-document-200",
+      "from": "get-document",
+      "to": "documents-schema",
+      "label": "200"
+    },
+    {
+      "id": "api-error",
+      "from": "api",
+      "to": "error-schema",
+      "label": "default",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Operations",
+      "items": [
+        "Two resources, three operations each: list, create, get by id",
+        "List calls accept ?limit (max 100) and return an x-next header for the next page",
+        "Create calls return 201 with no body"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Responses",
+      "items": [
+        "Every operation's default response is Error {code, message}",
+        "Get-by-id responses reference the array schemas (Projects, Documents), not a single item"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Not in the spec",
+      "items": [
+        "No security schemes or auth are defined",
+        "No request bodies are defined for the POST operations"
+      ]
+    }
+  ]
+}
